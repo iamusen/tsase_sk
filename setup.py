@@ -3,13 +3,11 @@
 from skbuild import setup
 import os
 
-# 自动查找所有包含 __init__.py 的包
 packages = []
 for dirname, dirnames, filenames in os.walk('tsase'):
     if '__init__.py' in filenames:
         packages.append(dirname.replace('/', '.'))
 
-# 脚本文件列表
 scripts = [
     "bin/dump2xdat",
     "bin/kmc",
@@ -28,7 +26,6 @@ scripts = [
     "bin/xyz",
 ]
 
-# 包数据文件
 package_data = {
     'tsase': [
         'xyz/xyz.glade',
@@ -53,7 +50,6 @@ package_data = {
     ]
 }
 
-# 调用 setup 函数
 setup(
     name='tsase',
     version='1.0',
