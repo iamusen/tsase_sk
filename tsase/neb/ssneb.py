@@ -106,7 +106,7 @@ class ssneb:
         for i in range(1, n):
             # making a directory for each image, which is nessecary for vasp to read last step's WAVECAR
             # also, it is good to prevent overwriting files for parallelizaiton over images
-            fdname = f'{i:0>2d}' 
+            fdname = f'{i:0>2d}'
             if (not self.parallel) or (self.parallel and self.rank == 0):
                 if not os.path.exists(fdname): os.mkdir(fdname)
             cellt = cell1 + dRB * i
@@ -127,10 +127,10 @@ class ssneb:
 
         # add some new properties
         for i in [0,n]:
-            fdname = f'{i:0>2d}' 
+            fdname = f'{i:0>2d}'
             backfd = '../'
             if self.parallel: 
-                fdname += '/'+str(self.rank)+str(i)
+                fdname += '/'+str(self.rank)+f'{i:0>2d}'
                 backfd  = '../../'
             if not os.path.exists(fdname): os.makedirs(fdname)
             os.chdir(fdname)
@@ -221,7 +221,7 @@ class ssneb:
         else: 
             for i in range(1, self.numImages - 1):
                 # writing input and do the calculation in images' directories respectively
-                fdname = '0'+str(i)
+                fdname = f'{i:0>2d}'
                 os.chdir(fdname)
                 self.path[i].u     = self.path[i].get_potential_energy()
                 self.path[i].f     = self.path[i].get_forces()
